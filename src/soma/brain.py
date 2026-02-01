@@ -206,6 +206,13 @@ class StrategicLLM:
                 "Use test-time adaptation",
                 "Implement robust feature extraction"
             ])
+        else:
+            # Default strategies for unknown or other root causes
+            strategies.extend([
+                "Apply general adaptive strategies",
+                "Monitor performance metrics",
+                "Implement fallback mechanisms"
+            ])
         
         return strategies
     
@@ -221,6 +228,12 @@ class StrategicLLM:
             weaknesses.append("Inability to distinguish correlation from causation")
         elif root_cause == RootCauseType.VISUAL_BIAS:
             weaknesses.append("Over-reliance on visual features")
+        elif root_cause == RootCauseType.DISTRIBUTIONAL_SHIFT:
+            weaknesses.append("Sensitivity to distribution changes")
+        elif root_cause == RootCauseType.SPURIOUS_CORRELATION:
+            weaknesses.append("Reliance on spurious correlations")
+        else:
+            weaknesses.append("Unidentified model limitation")
         
         if "error_type" in failure_info:
             weaknesses.append(f"Susceptible to {failure_info['error_type']} errors")
@@ -246,6 +259,13 @@ class StrategicLLM:
                 advantages.append("Can leverage visual features for rapid perception")
             elif "susceptible" in weakness.lower():
                 advantages.append("Can be fine-tuned for specific error types")
+            elif "distribution" in weakness.lower():
+                advantages.append("Can adapt to diverse data domains")
+            elif "spurious" in weakness.lower():
+                advantages.append("Can learn from complex feature interactions")
+            else:
+                # Default conversion for any weakness
+                advantages.append("Can be strategically adapted and improved")
         
         return advantages
     
