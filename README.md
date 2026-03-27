@@ -3,6 +3,7 @@
   
   <p>
     <a href="https://arxiv.org/abs/2603.24060"><img src="https://img.shields.io/badge/Paper-arXiv%20-red.svg" alt="Paper"></a>
+    <a href="https://lzy-1021.github.io/SOMA/"><img src="https://img.shields.io/badge/Page-SOMA%20-blue.svg" alt="Paper"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
   </p>
 
