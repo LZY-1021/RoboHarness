@@ -41,14 +41,14 @@
       <td><i>"Pick the red bowl from center of the cross formation and place it on the plate"</i></td>
       <td><img src="docs/visual/original.jpg" alt="Origin" width="100%"/></td>
       <td><img src="docs/visual/modified.jpg" alt="Modified" width="100%"/></td>
-      <td><video src="[visual](https://github.com/user-attachments/assets/88531590-1b4b-43a0-bf23-ff3958561c04)" width="100%" autoplay loop muted playsinline></video></td>
+      <td><video src="https://github.com/user-attachments/assets/88531590-1b4b-43a0-bf23-ff3958561c04" width="100%" autoplay loop muted playsinline></video></td>
     </tr>
     <tr>
       <td><b>Distractor Remove</b></td>
       <td><i>"Pick the black bowl from left of the cross formation and place it on the plate"</i></td>
       <td><img src="docs/distractor/original.jpg" alt="Origin" width="100%"/></td>
       <td><img src="docs/distractor/modified.jpg" alt="Modified" width="100%"/></td>
-      <td><video src="[distractor](https://github.com/user-attachments/assets/676b413f-d165-4454-9cf3-e68fce8ba1ae)" width="100%" autoplay loop muted playsinline></video></td>
+      <td><video src="https://github.com/user-attachments/assets/676b413f-d165-4454-9cf3-e68fce8ba1ae" width="100%" autoplay loop muted playsinline></video></td>
     </tr>
   </table>
   <table style="width:100%; text-align:center; vertical-align: middle;">
@@ -64,7 +64,7 @@
       <td><i>"Hey, umm... look down there. Can you grab that bottle? You know, the one for fries? Yeah, put it in the basket."</i></td>
       <td><i>"Pick the red sauce bottle and place it in the basket"</i></td>
       <td><img src="docs/noisy-prompt/original.jpg" alt="Origin" width="100%"/></td>
-      <td><video src="[noisy-prompt](https://github.com/user-attachments/assets/b8b34fd3-c33a-41af-899b-1d8c25e7ac75)" width="100%" autoplay loop muted playsinline></video></td>
+      <td><video src="https://github.com/user-attachments/assets/b8b34fd3-c33a-41af-899b-1d8c25e7ac75" width="100%" autoplay loop muted playsinline></video></td>
     </tr>
     <tr>
       <td><b>Task Decompose</b></td>
@@ -74,7 +74,7 @@
         <b>[SubTask-2]</b> <i>"Pick the cream cheese and place it in the basket."</i>
       </td>
       <td><img src="docs/long-task/original.jpg" alt="Origin" width="100%"/></td>
-      <td><video src="[long-task](https://github.com/user-attachments/assets/432ad762-ad57-4fd9-96cf-44e0e4b6854c)" width="100%" autoplay loop muted playsinline></video></td>
+      <td><video src="https://github.com/user-attachments/assets/432ad762-ad57-4fd9-96cf-44e0e4b6854c" width="100%" autoplay loop muted playsinline></video></td>
     </tr>
   </table>
 </div>
