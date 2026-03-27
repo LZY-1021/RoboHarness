@@ -2,7 +2,7 @@
   <h1>SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
   
   <p>
-    <a href="https://arxiv.org/abs/2603.24060"><img src="https://img.shields.io/badge/Paper-pdf%20-red.svg" alt="Paper"></a>
+    <a href="https://arxiv.org/abs/2603.24060"><img src="https://img.shields.io/badge/Paper-arXiv%20-red.svg" alt="Paper"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
   </p>
 
