@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOMA | Strategic Orchestration and Memory-Augmented System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            color: #1e293b;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 4rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        .badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .badge-paper {
+            background: #ef4444;
+            color: white;
+        }
+        .badge-github {
+            background: #1f2937;
+            color: white;
+        }
+        .badge-license {
+            background: #10b981;
+            color: white;
+        }
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #475569;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        .stat-label {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-top: 0.3rem;
+        }
+        /* Section Styles */
+        section {
+            padding: 3rem 0;
+        }
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Highlights Cards */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .highlight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .highlight-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .highlight-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.8rem;
+        }
+        .highlight-desc {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+        /* Framework Figure */
+        .figure-container {
+            text-align: center;
+            margin: 2.5rem 0;
+        }
+        .figure-container img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .figure-caption {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 1rem;
+        }
+        /* Demo Tables */
+        .demo-wrapper {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #334155;
+        }
+        td img, td video {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        /* Collapsible Section */
+        details {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            margin: 2rem 0;
+        }
+        summary {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            user-select: none;
+        }
+        .collapsible-content {
+            margin-top: 1.5rem;
+        }
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 3rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        .citation {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: left;
+            font-family: ui-monospace, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 2rem;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .stat-card {
+                padding: 1.2rem 1.8rem;
+            }
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
+        
+        <div class="badges">
+            <a href="http://arxiv.org/abs/2603.24060" target="_blank" class="badge badge-paper">
+                📄 Paper (arXiv)
+            </a>
+            <a href="https://github.com/iairplane/SOMA.git" target="_blank" class="badge badge-github">
+                ⭐ GitHub Code
+            </a>
+            <a href="#" class="badge badge-license">
+                📜 MIT License
+            </a>
+        </div>
+
+        <p class="hero-desc">
+            SOMA upgrades frozen Vision-Language-Action (VLA) policies for robust in-context adaptation without parameter fine-tuning, via contrastive <b>Dual-Memory RAG</b>, an <b>Attribution-Driven LLM Orchestrator</b>, <b>Dynamic MCP Interventions</b>, and <b>Offline Memory Consolidation</b>.
+        </p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">56.6%</div>
+                <div class="stat-label">Avg. Absolute Gain<br>(LIBERO-PRO + LIBERO-SOMA)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">89.1%</div>
+                <div class="stat-label">Absolute Improvement<br>(Long-Horizon Task Chaining)</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Highlights -->
+    <section>
+        <h2 class="section-title">🚀 Core Highlights</h2>
+        <div class="highlights">
+            <div class="highlight-card">
+                <div class="highlight-icon">🧠</div>
+                <h3 class="highlight-title">Dual-Memory RAG</h3>
+                <p class="highlight-desc">Contrastive retrieval from both success and failure memory banks for stable, low-cost intervention planning.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🎯</div>
+                <h3 class="highlight-title">Attribution-Driven Orchestrator</h3>
+                <p class="highlight-desc">LLM-based strategic planner that generates precise tool-chain plans and task refinements.</p>
+            </div>
+            <div class="highlight-card">
+                <div class="highlight-icon">🛠️</div>
+                <h3 class="highlight-title">Dynamic MCP Interventions</h3>
+                <p class="highlight-desc">Extensible visual tools (overlay, distractor removal) and control flow (rollback, decomposition).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework -->
+    <section>
+        <h2 class="section-title">🎥 SOMA Framework</h2>
+        <p class="section-subtitle">Here, we demonstrate how SOMA perceives visual input and retrieves historical experience to handle image/task prompts without requiring VLA fine-tuning, leading to a higher success rate.</p>
+        
+        <div class="figure-container">
+            <img src="docs/framework.jpg" alt="SOMA Framework">
+            <p class="figure-caption"><b>Figure 1:</b> Overview of the SOMA framework architecture.</p>
+        </div>
+    </section>
+
+    <!-- Demos -->
+    <section>
+        <h2 class="section-title">📊 Generalization Performance Demos</h2>
+        <p class="section-subtitle">Our experiments are based on the LIBERO Benchmark. We modified LIBERO to create <b>LIBERO-SOMA</b> and also utilized <b>LIBERO-PRO</b> to evaluate robustness.</p>
+
+        <!-- Visual Tools Demo -->
+        <div class="demo-wrapper">
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Visual Intervention Tools</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>🧰 MCP Tool</th>
+                        <th>🗣️ Task Prompt</th>
+                        <th>🖼️ Origin Image</th>
+                        <th>🛠️ Modified Image</th>
+                        <th>🎬 Success Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Visual Overlay</b></td>
+                        <td><i>"Pick the red bowl from center of the cross formation and place it on the plate"</i></td>
+                        <td><img src="docs/visual/original.jpg" alt="Origin"></td>
+                        <td><img src="docs/visual/modified.jpg" alt="Modified"></td>
+                        <td><video src="docs/visual/success.mp4" autoplay loop muted playsinline></video></td>
+                    </tr>
+                    <tr>
+                        <td><b>Distractor Remove</b></td>
+                        <td><i>"Pick the black bowl from left of the cross formation and place it on the plate"</i></td>
+                        <td><img src="docs/distractor/original.jpg" alt="Origin"></td>
+                        <td><img src="docs/distractor/modified.jpg" alt="Modified"></td>
+                        <td><video src="docs/distractor/success.mp4" autoplay loop muted playsinline></video></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Text Tools Demo -->
+        <div class="demo-wrapper">
+            <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Text & Task Refinement Tools</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>🧰 MCP Tool</th>
+                        <th>🗣️ Original Prompt</th>
+                        <th>🛠️ Refined Prompt</th>
+                        <th>🖼️ Observation</th>
+                        <th>🎬 Success Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Prompt Simplify</b></td>
+                        <td><i>"Hey, umm... look down there. Can you grab that bottle? You know, the one for fries? Yeah, put it in the basket."</i></td>
+                        <td><i>"Pick the red sauce bottle and place it in the basket"</i></td>
+                        <td><img src="docs/noisy-prompt/original.jpg" alt="Origin"></td>
+                        <td><video src="docs/noisy-prompt/success.mp4" autoplay loop muted playsinline></video></td>
+                    </tr>
+                    <tr>
+                        <td><b>Task Decompose</b></td>
+                        <td><i>"Sort the items: milk and cream cheese into the basket"</i></td>
+                        <td style="text-align: left;">
+                            <b>[SubTask-1]</b> <i>"Pick the milk and place it in the basket."</i><br>
+                            <b>[SubTask-2]</b> <i>"Pick the cream cheese and place it in the basket."</i>
+                        </td>
+                        <td><img src="docs/long-task/original.jpg" alt="Origin"></td>
+                        <td><video src="docs/long-task/success.mp4" autoplay loop muted playsinline></video></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- More Results -->
+    <section>
+        <details>
+            <summary>🔥 Click to see more Experiment Results & Ablation Studies</summary>
+            <div class="collapsible-content">
+                <div class="tags">
+                    <span class="tag">LIBERO-SOMA + LIBERO-PRO</span>
+                    <span class="tag">Backbones: π₀, π₀.₅, SmolVLA</span>
+                    <span class="tag">Zero-shot In-Context Adaptation</span>
+                    <span class="tag">OOD-Generalization</span>
+                </div>
+
+                <!-- Quick Glance -->
+                <div class="demo-wrapper" style="margin-top: 1.5rem;">
+                    <h3 style="margin-bottom: 1rem;">Quick Glance KPI</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Baseline</th>
+                                <th>SOMA</th>
+                                <th>Gain</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>LIBERO-PRO Avg (Pos)</td><td>2.33%</td><td><b style="color: #2563eb;">57.2%</b></td><td><b style="color: #10b981;">+54.87%</b></td></tr>
+                            <tr><td>LIBERO-PRO Avg (Task)</td><td>0.86%</td><td><b style="color: #2563eb;">55.2%</b></td><td><b style="color: #10b981;">+54.34%</b></td></tr>
+                            <tr><td>Dual-Memory Avg Turns</td><td>7.40 (No Memory)</td><td><b style="color: #2563eb;">1.07</b></td><td><b style="color: #10b981;">-85.5%</b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- LIBERO-SOMA Figure -->
+                <div class="figure-container">
+                    <img src="docs/result.png" alt="LIBERO-SOMA Results">
+                    <p class="figure-caption"><b>Figure:</b> Main performance comparison across visual, linguistic, and long-horizon OOD challenges.</p>
+                </div>
+                <p style="text-align: center; color: #475569; margin-bottom: 2rem;">
+                    <b>SOMA consistently reduces sensitivity to sensory noise, linguistic ambiguity, execution instability, and long-horizon error accumulation</b>.
+                </p>
+
+                <!-- Ablation -->
+                <h3 class="section-title" style="margin-top: 3rem;">🔍 Ablation Study</h3>
+                
+                <div class="highlights">
+                    <div class="demo-wrapper" style="flex: 1; min-width: 300px;">
+                        <h4 style="margin-bottom: 1rem;">🧠 Dual-Memory Ablation</h4>
+                        <table>
+                            <thead>
+                                <tr><th>Memory Setting</th><th>Avg. Turns</th><th>First-Turn Score</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>No Memory</td><td>7.40</td><td>60.0</td></tr>
+                                <tr><td>Failure Only</td><td>7.33</td><td>73.75</td></tr>
+                                <tr><td>Success Only</td><td>1.47</td><td>91.07</td></tr>
+                                <tr><td><b>SOMA (Dual)</b></td><td><b>1.07</b></td><td><b>96.3</b></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="demo-wrapper" style="flex: 1; min-width: 300px;">
+                        <h4 style="margin-bottom: 1rem;">🧩 RAG Richness Ablation</h4>
+                        <table>
+                            <thead>
+                                <tr><th>RAG Config</th><th>Success Rate</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>No-RAG</td><td>19.2%</td></tr>
+                                <tr><td>Limited-RAG</td><td>48.8%</td></tr>
+                                <tr><td><b>Rich-RAG (SOMA)</b></td><td><b>60.1%</b></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Explore More</h3>
+        <div class="footer-links">
+            <a href="http://arxiv.org/abs/2603.24060" target="_blank" class="footer-link">📖 Read the Paper on arXiv</a>
+            <a href="https://github.com/iairplane/SOMA.git" target="_blank" class="footer-link">💻 View Code on GitHub</a>
+        </div>
+
+        <div class="citation">
+            <b style="display: block; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">Citation:</b>
+            @misc{li2026soma,
+              title={SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation},
+              author={Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
+              year={2026},
+              eprint={2603.24060},
+              archivePrefix={arXiv},
+              primaryClass={cs.RO},
+              url={http://arxiv.org/abs/2603.24060}
+            }
+        </div>
+
+        <p style="margin-top: 2rem; color: #64748b; font-size: 0.9rem;">
+            Acknowledgements: This repository builds upon <b>LIBERO-PRO</b> and <b>LeRobot</b>. We thank the original authors for their foundational contributions.
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>
