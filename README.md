@@ -2,7 +2,7 @@
   <h1>SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
   
   <p>
-    <a href="docs/SOMA_paper.pdf"><img src="https://img.shields.io/badge/Paper-pdf%20-red.svg" alt="Paper"></a>
+    <a href="https://arxiv.org/abs/2603.24060"><img src="https://img.shields.io/badge/Paper-pdf%20-red.svg" alt="Paper"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
   </p>
 
@@ -608,6 +608,16 @@ We sincerely thank the original authors and maintainers for their foundational c
 If you find this repository useful, please cite **SOMA** and the upstream projects below:
 
 ```bibtex
+@misc{li2026somastrategicorchestrationmemoryaugmented,
+      title={SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation}, 
+      author={Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
+      year={2026},
+      eprint={2603.24060},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2603.24060}, 
+}
+
 @misc{zhou2025liberoprorobustfairevaluation,
   title={LIBERO-PRO: Towards Robust and Fair Evaluation of Vision-Language-Action Models Beyond Memorization},
   author={Xueyang Zhou and Yangming Xu and Guiyao Tie and Yongchao Chen and Guowen Zhang and Duanfeng Chu and Pan Zhou and Lichao Sun},
