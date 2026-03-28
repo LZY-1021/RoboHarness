@@ -323,7 +323,7 @@ We sincerely thank the original authors and maintainers for their foundational c
 
 ---
 
-<!-- # Citation
+# Citation
 
 If you find this repository useful, please cite **SOMA** and the upstream projects below:
 
@@ -357,12 +357,12 @@ If you find this repository useful, please cite **SOMA** and the upstream projec
 }
 ```
 
---- -->
+---
 
-<!-- # License
+# License
 
 | Component | License |
 |---|---|
 | Codebase | [MIT License](LICENSE) |
 
---- -->
+---
