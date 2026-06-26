@@ -329,7 +329,7 @@ If you find this repository useful, please cite **RoboHarness** and the upstream
 
 ```bibtex
 @misc{li2026roboharnessmemoryaugmentedpolicyharness,
-      title={RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation},
+      title={RoboHarness: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation},
       author={Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
       year={2026},
       eprint={2603.24060},

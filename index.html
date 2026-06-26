@@ -8,292 +8,572 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        :root {
+            --bg: #f6f8fb;
+            --surface: #ffffff;
+            --surface-soft: #f9fbfd;
+            --ink: #0f172a;
+            --text: #273449;
+            --muted: #64748b;
+            --primary: #1d4ed8;
+            --primary-dark: #1e3a8a;
+            --accent: #0f9f9a;
+            --accent-soft: #e6f7f5;
+            --border: #dbe4ef;
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 16px 40px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 24px 70px rgba(15, 23, 42, 0.12);
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 8px;
+            --container: 1120px;
+            --section: 72px;
+        }
+
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            text-size-adjust: 100%;
+        }
+
+        body {
             margin: 0;
+            min-width: 320px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background:
+                linear-gradient(180deg, #eef5fb 0%, var(--bg) 300px, #ffffff 100%);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            z-index: 1000;
+            transform: translateY(-160%);
+            padding: 0.65rem 1rem;
+            border-radius: var(--radius-sm);
+            background: var(--ink);
+            color: #fff;
+            text-decoration: none;
+            transition: transform 160ms ease;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .container {
+            width: min(100% - 40px, var(--container));
+            max-width: none;
             padding: 0;
         }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-            color: #1e293b;
-            line-height: 1.7;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        /* Hero Section */
+
         .hero {
-            padding: 5rem 0 4rem;
+            padding: 88px 0 64px;
             text-align: center;
         }
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
-        }
-        .badges {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .badge {
+
+        .eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 9999px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            justify-content: center;
+            min-height: 34px;
+            margin-bottom: 1.25rem;
+            padding: 0.35rem 0.85rem;
+            border: 1px solid rgba(29, 78, 216, 0.18);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            color: var(--primary-dark);
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
-        .badge-paper {
-            background: #ef4444;
-            color: white;
+
+        .hero h1 {
+            max-width: 980px;
+            margin: 0 auto 1.25rem;
+            color: var(--ink);
+            font-size: clamp(2.1rem, 5vw, 4.85rem);
+            font-weight: 800;
+            line-height: 1.05;
         }
-        .badge-github {
-            background: #1f2937;
-            color: white;
+
+        .title-mark {
+            white-space: nowrap;
+            color: var(--primary);
         }
-        .badge-license {
-            background: #10b981;
-            color: white;
-        }
-        .badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
+
         .hero-desc {
-            font-size: 1.1rem;
+            max-width: 850px;
+            margin: 0 auto 2rem;
             color: #475569;
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
+            font-size: clamp(1rem, 1.5vw, 1.16rem);
+            line-height: 1.8;
         }
-        .stats {
+
+        .badges {
             display: flex;
-            gap: 2rem;
+            align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.1rem;
         }
-        .stat-card {
-            background: white;
-            padding: 1.5rem 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-        }
-        .stat-value {
-            font-size: 2.5rem;
+
+        .badge,
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            border-radius: 999px;
+            text-decoration: none;
             font-weight: 700;
-            color: #2563eb;
+            transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
         }
+
+        .badge {
+            padding: 0.7rem 1.05rem;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--ink);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .badge-paper {
+            border-color: rgba(29, 78, 216, 0.25);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .badge-github,
+        .badge-license {
+            background: var(--surface);
+            color: var(--ink);
+        }
+
+        .badge:hover,
+        .footer-link:hover {
+            border-color: rgba(29, 78, 216, 0.35);
+            box-shadow: 0 10px 24px rgba(29, 78, 216, 0.12);
+            color: var(--primary-dark);
+            transform: none;
+        }
+
+        .badge-paper:hover {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(15, 159, 154, 0.45);
+            outline-offset: 3px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1px;
+            max-width: 720px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card {
+            border: 0;
+            border-radius: 0;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 1.35rem 1.75rem;
+            box-shadow: none;
+        }
+
+        .stat-value {
+            color: var(--primary);
+            font-size: clamp(2.05rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1;
+        }
+
         .stat-label {
-            font-size: 0.95rem;
-            color: #64748b;
-            margin-top: 0.3rem;
-        }
-        /* Section Styles */
-        section {
-            padding: 3rem 0;
-        }
-        .section-title {
-            font-size: 1.7rem;
+            margin-top: 0.65rem;
+            color: var(--muted);
+            font-size: 0.9rem;
             font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 1.5rem;
+        }
+
+        section {
+            padding: var(--section) 0;
+        }
+
+        .section-title {
+            margin-bottom: 0.75rem;
+            color: var(--ink);
+            font-size: clamp(1.65rem, 3vw, 2.4rem);
+            font-weight: 800;
+            line-height: 1.15;
             text-align: center;
         }
+
         .section-subtitle {
-            font-size: 1rem;
-            color: #64748b;
-            text-align: center;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 760px;
+            margin: 0 auto 2.25rem;
+            color: var(--muted);
+            font-size: 1.02rem;
         }
-        /* Highlights Cards */
+
         .highlights {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
             margin-top: 2rem;
         }
+
         .highlight-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
+            min-height: 220px;
+            padding: 1.55rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+            transition: border-color 180ms ease, box-shadow 180ms ease;
         }
+
         .highlight-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border-color: rgba(29, 78, 216, 0.3);
+            box-shadow: var(--shadow-md);
+            transform: none;
         }
-        .highlight-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+
+        .highlight-index {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(15, 159, 154, 0.2);
+            border-radius: 50%;
+            background: var(--accent-soft);
+            color: #087a76;
+            font-size: 0.78rem;
+            font-weight: 800;
         }
+
         .highlight-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
+            color: var(--ink);
+            font-size: 1.18rem;
+            font-weight: 800;
         }
+
         .highlight-desc {
-            font-size: 0.95rem;
-            color: #64748b;
+            color: var(--muted);
+            font-size: 0.96rem;
         }
-        /* Framework Figure */
+
+        .figure-container,
+        .demo-wrapper,
+        details {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+            box-shadow: var(--shadow-md);
+        }
+
         .figure-container {
-            text-align: center;
-            margin: 2.5rem 0;
+            margin: 2rem 0 0;
+            padding: 1rem;
         }
+
         .figure-container img {
-            max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
+
         .figure-caption {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-top: 1rem;
+            max-width: 880px;
+            margin: 1rem auto 0;
+            color: var(--muted);
+            font-size: 0.93rem;
+            text-align: center;
         }
-        /* Demo Tables */
+
         .demo-wrapper {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
             overflow-x: auto;
         }
+
+        .demo-wrapper h3,
+        .demo-wrapper h4 {
+            color: var(--ink);
+            font-weight: 800;
+        }
+
         table {
             width: 100%;
-            border-collapse: collapse;
+            min-width: 760px;
             margin: 1rem 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: #fff;
         }
-        th, td {
+
+        th,
+        td {
             padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
             text-align: center;
-            border-bottom: 1px solid #e2e8f0;
             vertical-align: middle;
         }
+
         th {
-            background: #f8fafc;
-            font-weight: 600;
-            color: #334155;
+            background: var(--surface-soft);
+            color: var(--ink);
+            font-size: 0.86rem;
+            font-weight: 800;
         }
-        td img, td video {
-            max-width: 100%;
-            border-radius: 8px;
+
+        tr:last-child td {
+            border-bottom: 0;
         }
-        /* Collapsible Section */
+
+        td img,
+        td video {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--surface-soft);
+        }
+
         details {
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-            margin: 2rem 0;
+            padding: 0;
+            overflow: hidden;
         }
+
         summary {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 64px;
+            padding: 1.25rem 1.5rem;
+            color: var(--ink);
             cursor: pointer;
+            font-size: 1.08rem;
+            font-weight: 800;
+            list-style: none;
             user-select: none;
         }
-        .collapsible-content {
-            margin-top: 1.5rem;
+
+        summary::-webkit-details-marker {
+            display: none;
         }
+
+        summary::after {
+            content: "+";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            margin-left: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        .collapsible-content {
+            margin-top: 0;
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
         .tags {
             display: flex;
-            gap: 0.5rem;
             flex-wrap: wrap;
             justify-content: center;
-            margin: 1rem 0;
+            gap: 0.55rem;
+            margin: 1.25rem 0;
         }
+
         .tag {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 0.3rem 0.8rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            padding: 0.4rem 0.72rem;
+            border: 1px solid rgba(15, 159, 154, 0.18);
+            background: var(--accent-soft);
+            color: #0f766e;
+            font-size: 0.82rem;
+            font-weight: 800;
         }
-        /* Footer */
+
         footer {
+            margin-top: 4rem;
             padding: 3rem 0;
+            border-top: 1px solid var(--border);
             text-align: center;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 3rem;
         }
+
         .footer-links {
             display: flex;
-            gap: 2rem;
             justify-content: center;
-            margin-bottom: 1.5rem;
             flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
+
         .footer-link {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 500;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--ink);
         }
-        .footer-link:hover {
-            text-decoration: underline;
-        }
+
         .citation {
+            max-width: 900px;
+            margin: 2rem auto 0;
+            padding: 1.35rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
             background: #f8fafc;
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: left;
-            font-family: ui-monospace, monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            margin-top: 2rem;
+            color: #334155;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.86rem;
+            line-height: 1.65;
         }
-        /* Responsive */
-        @media (max-width: 768px) {
+
+        @media (max-width: 900px) {
+            .container {
+                width: min(100% - 28px, var(--container));
+            }
+
+            .hero {
+                padding: 64px 0 48px;
+            }
+
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                max-width: 560px;
+            }
+
+            section {
+                padding: 56px 0;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width: min(100% - 24px, var(--container));
+            }
+
+            .hero {
+                padding-top: 48px;
+            }
+
             .hero h1 {
-                font-size: 1.7rem;
+                font-size: clamp(2rem, 11vw, 3rem);
             }
+
+            .badges {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .badge,
+            .footer-link {
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
             .stat-card {
-                padding: 1.2rem 1.8rem;
+                padding: 1.15rem;
             }
-            .stat-value {
-                font-size: 2rem;
+
+            .demo-wrapper,
+            .figure-container,
+            .collapsible-content {
+                padding: 1rem;
+            }
+
+            summary {
+                padding: 1rem;
+            }
+
+            table {
+                min-width: 680px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<main class="container" id="main-content">
     <!-- Hero Section -->
     <header class="hero">
-        <h1>RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
+        <div class="eyebrow">Memory-Augmented Policy Harness for Frozen VLA Policies</div>
+        <h1><span class="title-mark">RoboHarness 🏇</span>: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
         
         <div class="badges">
-            <a href="http://arxiv.org/abs/2603.24060" target="_blank" class="badge badge-paper">
-                📄 Paper (arXiv)
+            <a href="http://arxiv.org/abs/2603.24060" target="_blank" rel="noopener" class="badge badge-paper">
+                Paper (arXiv)
             </a>
-            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" class="badge badge-github">
-                ⭐ GitHub Code
+            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" rel="noopener" class="badge badge-github">
+                GitHub Code
             </a>
             <a href="#" class="badge badge-license">
-                📜 MIT License
+                MIT License
             </a>
         </div>
 
@@ -315,20 +595,20 @@
 
     <!-- Highlights -->
     <section>
-        <h2 class="section-title">🚀 Core Highlights</h2>
+        <h2 class="section-title">Core Highlights</h2>
         <div class="highlights">
             <div class="highlight-card">
-                <div class="highlight-icon">🧠</div>
+                <div class="highlight-index">01</div>
                 <h3 class="highlight-title">Dual-Memory RAG</h3>
                 <p class="highlight-desc">Contrastive retrieval from both success and failure memory banks for stable, low-cost intervention planning.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">🎯</div>
-                <h3 class="highlight-title">Attribution-Driven Orchestrator</h3>
+                <div class="highlight-index">02</div>
+                <h3 class="highlight-title">Vision-Language Orchestrator</h3>
                 <p class="highlight-desc">LLM-based strategic planner that generates precise tool-chain plans and task refinements.</p>
             </div>
             <div class="highlight-card">
-                <div class="highlight-icon">🛠️</div>
+                <div class="highlight-index">03</div>
                 <h3 class="highlight-title">Dynamic MCP Interventions</h3>
                 <p class="highlight-desc">Extensible visual tools (overlay, distractor removal) and control flow (rollback, decomposition).</p>
             </div>
@@ -337,7 +617,7 @@
 
     <!-- Framework -->
     <section>
-        <h2 class="section-title">🎥 RoboHarness Framework</h2>
+        <h2 class="section-title">RoboHarness Framework</h2>
         <p class="section-subtitle">Here, we demonstrate how RoboHarness perceives visual input and retrieves historical experience to handle image/task prompts without requiring VLA fine-tuning, leading to a higher success rate.</p>
         
         <div class="figure-container">
@@ -348,7 +628,7 @@
 
     <!-- Demos -->
     <section>
-        <h2 class="section-title">📊 Generalization Performance Demos</h2>
+        <h2 class="section-title">Generalization Performance Demos</h2>
         <p class="section-subtitle">Our experiments are based on the LIBERO Benchmark. We modified LIBERO to create <b>LIBERO-RoboHarness</b> and also utilized <b>LIBERO-PRO</b> to evaluate robustness.</p>
 
         <!-- Visual Tools Demo -->
@@ -357,11 +637,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>🧰 MCP Tool</th>
-                        <th>🗣️ Task Prompt</th>
-                        <th>🖼️ Origin Image</th>
-                        <th>🛠️ Modified Image</th>
-                        <th>🎬 Success Output</th>
+                        <th>MCP Tool</th>
+                        <th>Task Prompt</th>
+                        <th>Origin Image</th>
+                        <th>Modified Image</th>
+                        <th>Success Output</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -389,11 +669,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>🧰 MCP Tool</th>
-                        <th>🗣️ Original Prompt</th>
-                        <th>🛠️ Refined Prompt</th>
-                        <th>🖼️ Observation</th>
-                        <th>🎬 Success Output</th>
+                        <th>MCP Tool</th>
+                        <th>Original Prompt</th>
+                        <th>Refined Prompt</th>
+                        <th>Observation</th>
+                        <th>Success Output</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -422,7 +702,7 @@
     <!-- More Results -->
     <section>
         <details>
-            <summary>🔥 Click to see more Experiment Results & Ablation Studies</summary>
+            <summary>More Experiment Results & Ablation Studies</summary>
             <div class="collapsible-content">
                 <div class="tags">
                     <span class="tag">LIBERO-RoboHarness + LIBERO-PRO</span>
@@ -461,11 +741,11 @@
                 </p>
 
                 <!-- Ablation -->
-                <h3 class="section-title" style="margin-top: 3rem;">🔍 Ablation Study</h3>
+                <h3 class="section-title" style="margin-top: 3rem;">Ablation Study</h3>
                 
                 <div class="highlights">
                     <div class="demo-wrapper" style="flex: 1; min-width: 300px;">
-                        <h4 style="margin-bottom: 1rem;">🧠 Dual-Memory Ablation</h4>
+                        <h4 style="margin-bottom: 1rem;">Dual-Memory Ablation</h4>
                         <table>
                             <thead>
                                 <tr><th>Memory Setting</th><th>Avg. Turns</th><th>First-Turn Score</th></tr>
@@ -479,7 +759,7 @@
                         </table>
                     </div>
                     <div class="demo-wrapper" style="flex: 1; min-width: 300px;">
-                        <h4 style="margin-bottom: 1rem;">🧩 RAG Richness Ablation</h4>
+                        <h4 style="margin-bottom: 1rem;">RAG Richness Ablation</h4>
                         <table>
                             <thead>
                                 <tr><th>RAG Config</th><th>Success Rate</th></tr>
@@ -500,8 +780,8 @@
     <footer>
         <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Explore More</h3>
         <div class="footer-links">
-            <a href="http://arxiv.org/abs/2603.24060" target="_blank" class="footer-link">📖 Read the Paper on arXiv</a>
-            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" class="footer-link">💻 View Code on GitHub</a>
+            <a href="http://arxiv.org/abs/2603.24060" target="_blank" rel="noopener" class="footer-link">Read the Paper on arXiv</a>
+            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" rel="noopener" class="footer-link">View Code on GitHub</a>
         </div>
 
         <div class="citation">
@@ -521,7 +801,7 @@
             Acknowledgements: This repository builds upon <b>LIBERO-PRO</b> and <b>LeRobot</b>. We thank the original authors for their foundational contributions.
         </p>
     </footer>
-</div>
+</main>
 
 </body>
 </html>
