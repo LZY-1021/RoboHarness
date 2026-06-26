@@ -1,32 +1,32 @@
 <div align="center">
-  <h1>SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
+  <h1>RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
   
   <p>
     <a href="https://arxiv.org/abs/2603.24060"><img src="https://img.shields.io/badge/Paper-arXiv%20-red.svg" alt="Paper"></a>
-    <a href="https://lzy-1021.github.io/SOMA/"><img src="https://img.shields.io/badge/Page-SOMA%20-blue.svg" alt="Paper"></a>
+    <a href="https://lzy-1021.github.io/RoboHarness/"><img src="https://img.shields.io/badge/Page-RoboHarness%20-blue.svg" alt="Paper"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
   </p>
 
-  <p><i>SOMA upgrades frozen Vision-Language-Action (VLA) policies for robust in-context adaptation without parameter fine-tuning, via contrastive Dual-Memory RAG, an attribution-driven LLM orchestrator, dynamic MCP interventions, and offline memory consolidation.</i></p>
-  <p><i>Across <b>LIBERO-PRO</b> and <b>LIBERO-SOMA</b>, SOMA delivers an average absolute success-rate gain of <b>56.6%</b>, including a <b>89.1%</b> absolute improvement on long-horizon task chaining.</i></p>
+  <p><i>RoboHarness is a memory-augmented policy harness that upgrades frozen Vision-Language-Action (VLA) policies for robust in-context adaptation without parameter fine-tuning, via contrastive Dual-Memory RAG, an attribution-driven vision-language orchestrator implemented with a multimodal large language model, dynamic MCP interventions, and offline memory consolidation.</i></p>
+  <p><i>Across <b>LIBERO-PRO</b> and <b>LIBERO-RoboHarness</b>, RoboHarness delivers an average absolute success-rate gain of <b>56.6%</b>, including a <b>89.1%</b> absolute improvement on long-horizon task chaining.</i></p>
 </div>
 
 <br/>
 
 ## 🚀 Highlights & Demos
 
-### 🎥 SOMA FrameWork (VLM RAG & Visual Intervention)
-*Here, we demonstrate how SOMA preceive visual imput and retrival historical experience to handle iamge/task prompt without requiring VLA fine-tuning, leading to a higher success rate.*
+### 🎥 RoboHarness FrameWork (VLM RAG & Visual Intervention)
+*Here, we demonstrate how RoboHarness preceive visual imput and retrival historical experience to handle iamge/task prompt without requiring VLA fine-tuning, leading to a higher success rate.*
 
 <div align="center">
-  <img src="docs/framework.jpg" alt="SOMA Framework" width="800"/>
+  <img src="docs/framework.jpg" alt="RoboHarness Framework" width="800"/>
   <br/>
-  <p><sub><b>Figure 1:</b> SOMA Framework.</sub></p>
+  <p><sub><b>Figure 1:</b> RoboHarness Framework.</sub></p>
 </div>
 
-### 📊 SOMA Generalization Performance
-*Our Experiments are based on LIBERO Benchmark, we modified LIBERO to create our own benchmark named LIBERO-SOMA to test our SOMA with the baseline VLA policy compared to frozen VLA policy.*
-"We also utilize a portion of the LIBERO-PRO benchmark to evaluate the performance of our SOMA on position and task-related challenges."
+### 📊 RoboHarness Generalization Performance
+*Our Experiments are based on LIBERO Benchmark, we modified LIBERO to create our own benchmark named LIBERO-RoboHarness to test our RoboHarness with the baseline VLA policy compared to frozen VLA policy.*
+"We also utilize a portion of the LIBERO-PRO benchmark to evaluate the performance of our RoboHarness on position and task-related challenges."
 
 <div align="center">
   <table style="width:100%; text-align:center; vertical-align: middle;">
@@ -87,7 +87,7 @@
 <div align="center">
   <sub>
     <b>Benchmark Scope</b>:
-    <code>LIBERO-SOMA + LIBERO-PRO</code>
+    <code>LIBERO-RoboHarness + LIBERO-PRO</code>
     <code>Backbones: π₀, π₀.₅, SmolVLA</code>
     <code>Zero-shot In-Context Adaptation</code>
   </sub><br/>
@@ -107,7 +107,7 @@
     <tr>
       <th>Quick Glance KPI</th>
       <th>Baseline</th>
-      <th>SOMA</th>
+      <th>RoboHarness</th>
       <th>Gain</th>
     </tr>
   </thead>
@@ -121,16 +121,16 @@
 
 <br/>
 
-### 📊 LIBERO-SOMA (OOD Challenge Suite)
+### 📊 LIBERO-RoboHarness (OOD Challenge Suite)
 
 <div align="center">
-  <img src="docs/result.png" alt="LIBERO-SOMA Results" width="90%" style="border:1px solid #d0d7de; border-radius:12px; box-shadow:0 6px 18px rgba(31,35,40,0.12);"/>
+  <img src="docs/result.png" alt="LIBERO-RoboHarness Results" width="90%" style="border:1px solid #d0d7de; border-radius:12px; box-shadow:0 6px 18px rgba(31,35,40,0.12);"/>
   <br/>
   <sub><b>Figure:</b> Main performance comparison across visual, linguistic, and long-horizon OOD challenges.</sub>
 </div>
 
 <p>
-<b>SOMA consistently reduces sensitivity to sensory noise, linguistic ambiguity, execution instability, and long-horizon error accumulation</b>, restoring robust performance across major OOD failure modes.
+<b>RoboHarness consistently reduces sensitivity to sensory noise, linguistic ambiguity, execution instability, and long-horizon error accumulation</b>, restoring robust performance across major OOD failure modes.
 </p>
 
 <br/>
@@ -147,7 +147,7 @@
       <th>Category</th>
       <th>Task (Symbolic Form)</th>
       <th>π₀.₅ BASE</th>
-      <th>w/ SOMA</th>
+      <th>w/ RoboHarness</th>
     </tr>
   </thead>
   <tbody>
@@ -174,7 +174,7 @@
       <th>Category</th>
       <th>Task (Symbolic Form)</th>
       <th>π₀.₅ BASE</th>
-      <th>w/ SOMA</th>
+      <th>w/ RoboHarness</th>
     </tr>
   </thead>
   <tbody>
@@ -198,7 +198,7 @@
 </div>
 
 <p>
-<b>SOMA substantially improves spatial grounding and compositional generalization under layout and semantic shifts</b>, lifting near-zero baseline performance to strong OOD robustness without fine-tuning.
+<b>RoboHarness substantially improves spatial grounding and compositional generalization under layout and semantic shifts</b>, lifting near-zero baseline performance to strong OOD robustness without fine-tuning.
 </p>
 
 <hr/>
@@ -225,7 +225,7 @@
     <tr><td>No Memory</td><td>7.40</td><td>60.0</td></tr>
     <tr><td>Failure Only</td><td>7.33</td><td>73.75</td></tr>
     <tr><td>Success Only</td><td>1.47</td><td>91.07</td></tr>
-    <tr><td><b>SOMA (Dual)</b></td><td><b>1.07</b></td><td><b>96.3</b></td></tr>
+    <tr><td><b>RoboHarness (Dual)</b></td><td><b>1.07</b></td><td><b>96.3</b></td></tr>
   </tbody>
 </table>
 
@@ -256,14 +256,14 @@
   <tbody>
     <tr><td>No-RAG</td><td>Ambiguous ID, shadow errors, simple highlighting</td><td>19.2%</td></tr>
     <tr><td>Limited-RAG</td><td>Failure guidance + redundant background replacement</td><td>48.8%</td></tr>
-    <tr><td><b>Rich-RAG (SOMA)</b></td><td><b>Precise failure-aware distractor removal, clean strategy</b></td><td><b>60.1%</b></td></tr>
+    <tr><td><b>Rich-RAG (RoboHarness)</b></td><td><b>Precise failure-aware distractor removal, clean strategy</b></td><td><b>60.1%</b></td></tr>
   </tbody>
 </table>
 
 </div>
 
 <p>
-<b>Rich RAG (SOMA’s dual-stage consolidation) delivers sharper causal reasoning, shorter tool chains, and higher success</b> than No-RAG / Limited-RAG baselines.
+<b>Rich RAG (RoboHarness’s dual-stage consolidation) delivers sharper causal reasoning, shorter tool chains, and higher success</b> than No-RAG / Limited-RAG baselines.
 </p>
 
 </details>
@@ -275,36 +275,36 @@
 
 ## Repository Structure
 ```Plaintext
-SOMA/
+RoboHarness/
 ├── libero-modified/                  # Modified LIBERO simulation environment
-│   ├── bddl_files/libero_soma/       # BDDL task definitions for SOMA challenges
-│   │   ├── soma_chain_step_challenge.bddl
-│   │   ├── soma_distractor_challenge.bddl
+│   ├── bddl_files/libero_roboharness/       # BDDL task definitions for RoboHarness challenges
+│   │   ├── roboharness_chain_step_challenge.bddl
+│   │   ├── roboharness_distractor_challenge.bddl
 │   │   └── ... (other task variants)
 │   ├── benchmark/                    # Benchmark registration and task mapping
 │   │   ├── _init_.py                 # Init file to register LIBERO benchmarks
 │   │   ├── libero_suite_task_map.py  # Maps BDDL files to LIBERO benchmarks
 │   │   └── mu_creation.py            # Environment setup and asset creation
-│   ├── init_files/libero-soma/       # Pre-sampled initial states (.init) for tasks
-│   │   ├── soma_chain_step_challenge.init
-│   │   ├── soma_distractor_challenge.init
+│   ├── init_files/libero-roboharness/       # Pre-sampled initial states (.init) for tasks
+│   │   ├── roboharness_chain_step_challenge.init
+│   │   ├── roboharness_distractor_challenge.init
 │   │   └── ... (other task variants)
 │   └── sample_init_states.py         # Script to generate initial state files
-├── src/                              # Core SOMA Framework Source Code
+├── src/                              # Core RoboHarness Framework Source Code
 │   ├── outputs/                      
 │   ├── chain_step_eval.py            # Eval pipeline for multi-stage sequential tasks
 │   ├── image_attn_map.py             # Script for VLA attention weight visualization
 │   ├── RAG_ablation_study.py         # Script for testing memory bank impact
 │   ├── sam3_service.py               # Flask server hosting the SAM3 vision model
-│   ├── soma_agent.py                 # Unified facade for the SOMA cognitive agent
-│   ├── soma_control_flow.py          # State machine for Rollback/Encore/Decomposition
-│   ├── soma_encoder.py               # Multimodal embedding generator (CLIP + Text)
-│   ├── soma_eval.py                  # Primary evaluation entry point for SOMA
-│   ├── soma_logger.py                # Automated experience recording and diagnosis
-│   ├── soma_memory.py                # Persistent vector database for episodic memory
-│   ├── soma_perception.py            # Strategic orchestrator for VLM perception loop
-│   ├── soma_tools.py                 # Client for visual MCP tools (SAM3 HTTP calls)
-│   ├── soma_vlm.py                   # Client for Vision-Language Model reasoning
+│   ├── roboharness_agent.py                 # Unified facade for the RoboHarness cognitive agent
+│   ├── roboharness_control_flow.py          # State machine for Rollback/Encore/Decomposition
+│   ├── roboharness_encoder.py               # Multimodal embedding generator (CLIP + Text)
+│   ├── roboharness_eval.py                  # Primary evaluation entry point for RoboHarness
+│   ├── roboharness_logger.py                # Automated experience recording and diagnosis
+│   ├── roboharness_memory.py                # Persistent vector database for episodic memory
+│   ├── roboharness_perception.py            # Strategic orchestrator for VLM perception loop
+│   ├── roboharness_tools.py                 # Client for visual MCP tools (SAM3 HTTP calls)
+│   ├── roboharness_vlm.py                   # Client for Vision-Language Model reasoning
 │   └── test_sam3_mcp_tools.py        # Standalone verification for visual tools
 └── README.md                         # Project documentation and usage guide
 ```
@@ -325,11 +325,11 @@ We sincerely thank the original authors and maintainers for their foundational c
 
 # Citation
 
-If you find this repository useful, please cite **SOMA** and the upstream projects below:
+If you find this repository useful, please cite **RoboHarness** and the upstream projects below:
 
 ```bibtex
-@misc{li2026somastrategicorchestrationmemoryaugmented,
-      title={SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation}, 
+@misc{li2026roboharnessmemoryaugmentedpolicyharness,
+      title={RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation},
       author={Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
       year={2026},
       eprint={2603.24060},

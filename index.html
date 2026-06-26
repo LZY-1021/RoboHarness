@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOMA | Strategic Orchestration and Memory-Augmented System</title>
+    <title>RoboHarness 🏇 | A Memory-Augmented Policy Harness</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -283,13 +283,13 @@
 <div class="container">
     <!-- Hero Section -->
     <header class="hero">
-        <h1>SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
+        <h1>RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
         
         <div class="badges">
             <a href="http://arxiv.org/abs/2603.24060" target="_blank" class="badge badge-paper">
                 📄 Paper (arXiv)
             </a>
-            <a href="https://github.com/LZY-1021/SOMA.git" target="_blank" class="badge badge-github">
+            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" class="badge badge-github">
                 ⭐ GitHub Code
             </a>
             <a href="#" class="badge badge-license">
@@ -298,13 +298,13 @@
         </div>
 
         <p class="hero-desc">
-            SOMA upgrades frozen Vision-Language-Action (VLA) policies for robust in-context adaptation without parameter fine-tuning, via contrastive <b>Dual-Memory RAG</b>, an <b>Attribution-Driven LLM Orchestrator</b>, <b>Dynamic MCP Interventions</b>, and <b>Offline Memory Consolidation</b>.
+            RoboHarness is a memory-augmented policy harness that upgrades frozen Vision-Language-Action (VLA) policies for robust in-context adaptation without parameter fine-tuning, via contrastive <b>Dual-Memory RAG</b>, an <b>attribution-driven vision-language orchestrator implemented with a multimodal large language model</b>, <b>Dynamic MCP Interventions</b>, and <b>Offline Memory Consolidation</b>.
         </p>
 
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-value">56.6%</div>
-                <div class="stat-label">Avg. Absolute Gain<br>(LIBERO-PRO + LIBERO-SOMA)</div>
+                <div class="stat-label">Avg. Absolute Gain<br>(LIBERO-PRO + LIBERO-RoboHarness)</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">89.1%</div>
@@ -337,19 +337,19 @@
 
     <!-- Framework -->
     <section>
-        <h2 class="section-title">🎥 SOMA Framework</h2>
-        <p class="section-subtitle">Here, we demonstrate how SOMA perceives visual input and retrieves historical experience to handle image/task prompts without requiring VLA fine-tuning, leading to a higher success rate.</p>
+        <h2 class="section-title">🎥 RoboHarness Framework</h2>
+        <p class="section-subtitle">Here, we demonstrate how RoboHarness perceives visual input and retrieves historical experience to handle image/task prompts without requiring VLA fine-tuning, leading to a higher success rate.</p>
         
         <div class="figure-container">
-            <img src="docs/framework.jpg" alt="SOMA Framework">
-            <p class="figure-caption"><b>Figure 1:</b> Overview of the SOMA framework architecture.</p>
+            <img src="docs/framework.jpg" alt="RoboHarness Framework">
+            <p class="figure-caption"><b>Figure 1:</b> Overview of the RoboHarness framework architecture.</p>
         </div>
     </section>
 
     <!-- Demos -->
     <section>
         <h2 class="section-title">📊 Generalization Performance Demos</h2>
-        <p class="section-subtitle">Our experiments are based on the LIBERO Benchmark. We modified LIBERO to create <b>LIBERO-SOMA</b> and also utilized <b>LIBERO-PRO</b> to evaluate robustness.</p>
+        <p class="section-subtitle">Our experiments are based on the LIBERO Benchmark. We modified LIBERO to create <b>LIBERO-RoboHarness</b> and also utilized <b>LIBERO-PRO</b> to evaluate robustness.</p>
 
         <!-- Visual Tools Demo -->
         <div class="demo-wrapper">
@@ -425,7 +425,7 @@
             <summary>🔥 Click to see more Experiment Results & Ablation Studies</summary>
             <div class="collapsible-content">
                 <div class="tags">
-                    <span class="tag">LIBERO-SOMA + LIBERO-PRO</span>
+                    <span class="tag">LIBERO-RoboHarness + LIBERO-PRO</span>
                     <span class="tag">Backbones: π₀, π₀.₅, SmolVLA</span>
                     <span class="tag">Zero-shot In-Context Adaptation</span>
                     <span class="tag">OOD-Generalization</span>
@@ -439,7 +439,7 @@
                             <tr>
                                 <th>Metric</th>
                                 <th>Baseline</th>
-                                <th>SOMA</th>
+                                <th>RoboHarness</th>
                                 <th>Gain</th>
                             </tr>
                         </thead>
@@ -451,13 +451,13 @@
                     </table>
                 </div>
 
-                <!-- LIBERO-SOMA Figure -->
+                <!-- LIBERO-RoboHarness Figure -->
                 <div class="figure-container">
-                    <img src="docs/result.png" alt="LIBERO-SOMA Results">
+                    <img src="docs/result.png" alt="LIBERO-RoboHarness Results">
                     <p class="figure-caption"><b>Figure:</b> Main performance comparison across visual, linguistic, and long-horizon OOD challenges.</p>
                 </div>
                 <p style="text-align: center; color: #475569; margin-bottom: 2rem;">
-                    <b>SOMA consistently reduces sensitivity to sensory noise, linguistic ambiguity, execution instability, and long-horizon error accumulation</b>.
+                    <b>RoboHarness consistently reduces sensitivity to sensory noise, linguistic ambiguity, execution instability, and long-horizon error accumulation</b>.
                 </p>
 
                 <!-- Ablation -->
@@ -474,7 +474,7 @@
                                 <tr><td>No Memory</td><td>7.40</td><td>60.0</td></tr>
                                 <tr><td>Failure Only</td><td>7.33</td><td>73.75</td></tr>
                                 <tr><td>Success Only</td><td>1.47</td><td>91.07</td></tr>
-                                <tr><td><b>SOMA (Dual)</b></td><td><b>1.07</b></td><td><b>96.3</b></td></tr>
+                                <tr><td><b>RoboHarness (Dual)</b></td><td><b>1.07</b></td><td><b>96.3</b></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -487,7 +487,7 @@
                             <tbody>
                                 <tr><td>No-RAG</td><td>19.2%</td></tr>
                                 <tr><td>Limited-RAG</td><td>48.8%</td></tr>
-                                <tr><td><b>Rich-RAG (SOMA)</b></td><td><b>60.1%</b></td></tr>
+                                <tr><td><b>Rich-RAG (RoboHarness)</b></td><td><b>60.1%</b></td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -501,13 +501,13 @@
         <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Explore More</h3>
         <div class="footer-links">
             <a href="http://arxiv.org/abs/2603.24060" target="_blank" class="footer-link">📖 Read the Paper on arXiv</a>
-            <a href="https://github.com/LZY-1021/SOMA.git" target="_blank" class="footer-link">💻 View Code on GitHub</a>
+            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" class="footer-link">💻 View Code on GitHub</a>
         </div>
 
         <div class="citation">
             <b style="display: block; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">Citation:</b>
-            @misc{li2026soma,
-              title={SOMA: Strategic Orchestration and Memory-Augmented System for Vision-Language-Action Model Robustness via In-Context Adaptation},
+            @misc{li2026roboharness,
+              title={RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation},
               author={Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
               year={2026},
               eprint={2603.24060},
