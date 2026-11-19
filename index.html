@@ -1,808 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoboHarness 🏇 | A Memory-Augmented Policy Harness</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f6f8fb;
-            --surface: #ffffff;
-            --surface-soft: #f9fbfd;
-            --ink: #0f172a;
-            --text: #273449;
-            --muted: #64748b;
-            --primary: #1d4ed8;
-            --primary-dark: #1e3a8a;
-            --accent: #0f9f9a;
-            --accent-soft: #e6f7f5;
-            --border: #dbe4ef;
-            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-            --shadow-md: 0 16px 40px rgba(15, 23, 42, 0.08);
-            --shadow-lg: 0 24px 70px rgba(15, 23, 42, 0.12);
-            --radius-sm: 6px;
-            --radius-md: 8px;
-            --radius-lg: 8px;
-            --container: 1120px;
-            --section: 72px;
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            text-size-adjust: 100%;
-        }
-
-        body {
-            margin: 0;
-            min-width: 320px;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background:
-                linear-gradient(180deg, #eef5fb 0%, var(--bg) 300px, #ffffff 100%);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        img,
-        video {
-            display: block;
-            max-width: 100%;
-        }
-
-        .skip-link {
-            position: absolute;
-            left: 1rem;
-            top: 1rem;
-            z-index: 1000;
-            transform: translateY(-160%);
-            padding: 0.65rem 1rem;
-            border-radius: var(--radius-sm);
-            background: var(--ink);
-            color: #fff;
-            text-decoration: none;
-            transition: transform 160ms ease;
-        }
-
-        .skip-link:focus {
-            transform: translateY(0);
-        }
-
-        .container {
-            width: min(100% - 40px, var(--container));
-            max-width: none;
-            margin: 0 auto;
-            padding: 0;
-        }
-
-        .hero {
-            padding: 88px 0 64px;
-            text-align: center;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 34px;
-            margin-bottom: 1.25rem;
-            padding: 0.35rem 0.85rem;
-            border: 1px solid rgba(29, 78, 216, 0.18);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.72);
-            color: var(--primary-dark);
-            font-size: 0.84rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            max-width: 980px;
-            margin: 0 auto 1.25rem;
-            color: var(--ink);
-            font-size: clamp(2.1rem, 5vw, 4.85rem);
-            font-weight: 800;
-            line-height: 1.05;
-        }
-
-        .title-mark {
-            white-space: nowrap;
-            color: var(--primary);
-        }
-
-        .hero-desc {
-            max-width: 850px;
-            margin: 0 auto 2rem;
-            color: #475569;
-            font-size: clamp(1rem, 1.5vw, 1.16rem);
-            line-height: 1.8;
-        }
-
-        .badges {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 2.1rem;
-        }
-
-        .badge,
-        .footer-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 44px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
-        }
-
-        .badge {
-            padding: 0.7rem 1.05rem;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.82);
-            color: var(--ink);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .badge-paper {
-            border-color: rgba(29, 78, 216, 0.25);
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .badge-github,
-        .badge-license {
-            background: var(--surface);
-            color: var(--ink);
-        }
-
-        .badge:hover,
-        .footer-link:hover {
-            border-color: rgba(29, 78, 216, 0.35);
-            box-shadow: 0 10px 24px rgba(29, 78, 216, 0.12);
-            color: var(--primary-dark);
-            transform: none;
-        }
-
-        .badge-paper:hover {
-            background: var(--primary-dark);
-            color: #fff;
-        }
-
-        :focus-visible {
-            outline: 3px solid rgba(15, 159, 154, 0.45);
-            outline-offset: 3px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1px;
-            max-width: 720px;
-            margin: 0 auto;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            background: var(--border);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-card {
-            border: 0;
-            border-radius: 0;
-            background: rgba(255, 255, 255, 0.92);
-            padding: 1.35rem 1.75rem;
-            box-shadow: none;
-        }
-
-        .stat-value {
-            color: var(--primary);
-            font-size: clamp(2.05rem, 4vw, 3.2rem);
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .stat-label {
-            margin-top: 0.65rem;
-            color: var(--muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        section {
-            padding: var(--section) 0;
-        }
-
-        .section-title {
-            margin-bottom: 0.75rem;
-            color: var(--ink);
-            font-size: clamp(1.65rem, 3vw, 2.4rem);
-            font-weight: 800;
-            line-height: 1.15;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            max-width: 760px;
-            margin: 0 auto 2.25rem;
-            color: var(--muted);
-            font-size: 1.02rem;
-        }
-
-        .highlights {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .highlight-card {
-            min-height: 220px;
-            padding: 1.55rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            background: var(--surface);
-            box-shadow: var(--shadow-sm);
-            transition: border-color 180ms ease, box-shadow 180ms ease;
-        }
-
-        .highlight-card:hover {
-            border-color: rgba(29, 78, 216, 0.3);
-            box-shadow: var(--shadow-md);
-            transform: none;
-        }
-
-        .highlight-index {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            margin-bottom: 1.25rem;
-            border: 1px solid rgba(15, 159, 154, 0.2);
-            border-radius: 50%;
-            background: var(--accent-soft);
-            color: #087a76;
-            font-size: 0.78rem;
-            font-weight: 800;
-        }
-
-        .highlight-title {
-            margin-bottom: 0.7rem;
-            color: var(--ink);
-            font-size: 1.18rem;
-            font-weight: 800;
-        }
-
-        .highlight-desc {
-            color: var(--muted);
-            font-size: 0.96rem;
-        }
-
-        .figure-container,
-        .demo-wrapper,
-        details {
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            background: var(--surface);
-            box-shadow: var(--shadow-md);
-        }
-
-        .figure-container {
-            margin: 2rem 0 0;
-            padding: 1rem;
-        }
-
-        .figure-container img {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            background: #fff;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .figure-caption {
-            max-width: 880px;
-            margin: 1rem auto 0;
-            color: var(--muted);
-            font-size: 0.93rem;
-            text-align: center;
-        }
-
-        .demo-wrapper {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
-
-        .demo-wrapper h3,
-        .demo-wrapper h4 {
-            color: var(--ink);
-            font-weight: 800;
-        }
-
-        table {
-            width: 100%;
-            min-width: 760px;
-            margin: 1rem 0;
-            border-collapse: separate;
-            border-spacing: 0;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            background: #fff;
-        }
-
-        th,
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        th {
-            background: var(--surface-soft);
-            color: var(--ink);
-            font-size: 0.86rem;
-            font-weight: 800;
-        }
-
-        tr:last-child td {
-            border-bottom: 0;
-        }
-
-        td img,
-        td video {
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--surface-soft);
-        }
-
-        details {
-            padding: 0;
-            overflow: hidden;
-        }
-
-        summary {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 64px;
-            padding: 1.25rem 1.5rem;
-            color: var(--ink);
-            cursor: pointer;
-            font-size: 1.08rem;
-            font-weight: 800;
-            list-style: none;
-            user-select: none;
-        }
-
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary::after {
-            content: "+";
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            margin-left: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            color: var(--primary);
-            font-weight: 800;
-        }
-
-        details[open] summary::after {
-            content: "−";
-        }
-
-        .collapsible-content {
-            margin-top: 0;
-            padding: 0 1.5rem 1.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.55rem;
-            margin: 1.25rem 0;
-        }
-
-        .tag {
-            padding: 0.4rem 0.72rem;
-            border: 1px solid rgba(15, 159, 154, 0.18);
-            background: var(--accent-soft);
-            color: #0f766e;
-            font-size: 0.82rem;
-            font-weight: 800;
-        }
-
-        footer {
-            margin-top: 4rem;
-            padding: 3rem 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-link {
-            padding: 0.65rem 1rem;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--ink);
-        }
-
-        .citation {
-            max-width: 900px;
-            margin: 2rem auto 0;
-            padding: 1.35rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            background: #f8fafc;
-            color: #334155;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.86rem;
-            line-height: 1.65;
-        }
-
-        @media (max-width: 900px) {
-            .container {
-                width: min(100% - 28px, var(--container));
-            }
-
-            .hero {
-                padding: 64px 0 48px;
-            }
-
-            .highlights {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                max-width: 560px;
-            }
-
-            section {
-                padding: 56px 0;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .container {
-                width: min(100% - 24px, var(--container));
-            }
-
-            .hero {
-                padding-top: 48px;
-            }
-
-            .hero h1 {
-                font-size: clamp(2rem, 11vw, 3rem);
-            }
-
-            .badges {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .badge,
-            .footer-link {
-                width: 100%;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .stat-card {
-                padding: 1.15rem;
-            }
-
-            .demo-wrapper,
-            .figure-container,
-            .collapsible-content {
-                padding: 1rem;
-            }
-
-            summary {
-                padding: 1rem;
-            }
-
-            table {
-                min-width: 680px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                transition-duration: 0.01ms !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RoboHarness: A Memory-Augmented Policy Harness for VLA Robustness</title>
+<meta name="description" content="RoboHarness upgrades frozen Vision-Language-Action policies for robust in-context adaptation without fine-tuning, using Dual-Memory RAG, an attribution-driven orchestrator, MCP interventions and offline memory consolidation.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<a class="skip-link" href="#main-content">Skip to content</a>
-<main class="container" id="main-content">
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="eyebrow">Memory-Augmented Policy Harness for Frozen VLA Policies</div>
-        <h1><span class="title-mark">RoboHarness 🏇</span>: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation</h1>
-        
-        <div class="badges">
-            <a href="http://arxiv.org/abs/2603.24060" target="_blank" rel="noopener" class="badge badge-paper">
-                Paper (arXiv)
-            </a>
-            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" rel="noopener" class="badge badge-github">
-                GitHub Code
-            </a>
-            <a href="#" class="badge badge-license">
-                MIT License
-            </a>
-        </div>
+<header class="hero" aria-label="RoboHarness teaser">
+  <video id="hero-video" src="assets/hero-teaser.mp4" poster="assets/hero-teaser-end.jpg" autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+  <div class="hero-progress"><i id="hero-bar"></i></div>
+  <a class="hint" href="#title" id="hero-skip">Skip ↓</a>
+</header>
 
-        <p class="hero-desc">
-            RoboHarness is a memory-augmented policy harness that upgrades frozen Vision-Language-Action (VLA) policies for robust in-context adaptation without parameter fine-tuning, via contrastive <b>Dual-Memory RAG</b>, an <b>attribution-driven vision-language orchestrator implemented with a multimodal large language model</b>, <b>Dynamic MCP Interventions</b>, and <b>Offline Memory Consolidation</b>.
-        </p>
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <a href="#title">Title</a>
+    <a href="#abstract">Abstract</a>
+    <a href="#contributions">Contributions</a>
+    <a href="#method">Method</a>
+    <a class="sub" href="#framework">Framework explorer</a>
+    <a class="sub" href="#tools">MCP tools</a>
+    <a href="#demos">Interventions</a>
+    <a href="#results">Results</a>
+    <a class="sub" href="#lrh">LIBERO-RoboHarness</a>
+    <a class="sub" href="#pro">LIBERO-PRO</a>
+    <a class="sub" href="#latency">Latency</a>
+    <a class="sub" href="#ablations">Ablations</a>
+    <a href="#conclusion">Conclusion</a>
+    <a href="#citation">Citation</a>
+  </nav>
 
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-value">56.6%</div>
-                <div class="stat-label">Avg. Absolute Gain<br>(LIBERO-PRO + LIBERO-RoboHarness)</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">89.1%</div>
-                <div class="stat-label">Absolute Improvement<br>(Long-Horizon Task Chaining)</div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Highlights -->
-    <section>
-        <h2 class="section-title">Core Highlights</h2>
-        <div class="highlights">
-            <div class="highlight-card">
-                <div class="highlight-index">01</div>
-                <h3 class="highlight-title">Dual-Memory RAG</h3>
-                <p class="highlight-desc">Contrastive retrieval from both success and failure memory banks for stable, low-cost intervention planning.</p>
-            </div>
-            <div class="highlight-card">
-                <div class="highlight-index">02</div>
-                <h3 class="highlight-title">Vision-Language Orchestrator</h3>
-                <p class="highlight-desc">LLM-based strategic planner that generates precise tool-chain plans and task refinements.</p>
-            </div>
-            <div class="highlight-card">
-                <div class="highlight-index">03</div>
-                <h3 class="highlight-title">Dynamic MCP Interventions</h3>
-                <p class="highlight-desc">Extensible visual tools (overlay, distractor removal) and control flow (rollback, decomposition).</p>
-            </div>
-        </div>
+  <main>
+    <section id="title">
+      <div class="title-row">
+        <img src="assets/logo.png" width="512" height="512" alt="RoboHarness logo: a robot riding a horse">
+        <h1><span class="short">RoboHarness</span>: A Memory-Augmented Policy Harness for VLA Robustness</h1>
+      </div>
+      <p class="subtitle">Upgrading frozen Vision-Language-Action policies through in-context adaptation, without fine-tuning</p>
+      <p class="authors">
+        <a href="https://iairplane.github.io/">Zhuoran Li</a><sup>1*</sup>,
+        <span>Zhiyang Li</span><sup>1*</sup>,
+        <span>Kaijun Zhou</span><sup>1</sup>,
+        <a href="https://ipads.sjtu.edu.cn/pub/members/jinyu_gu">Jinyu Gu</a><sup>1,2†</sup>
+      </p>
+      <p class="affils">
+        <span><sup>1</sup><a href="https://www.cs.sjtu.edu.cn/">School of Computer Science, Shanghai Jiao Tong University</a></span>
+        <span><sup>2</sup>Shanghai Syslong Information Technology Co., Ltd.</span>
+        <span><sup>*</sup>Equal contribution · <sup>†</sup>Corresponding author</span>
+      </p>
+      <div class="buttons">
+        <a class="btn" href="https://arxiv.org/abs/2603.24060"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>arXiv</a>
+        <a class="btn" href="https://arxiv.org/pdf/2603.24060"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>PDF</a>
+        <a class="btn" href="https://github.com/LZY-1021/RoboHarness"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/></svg>Code</a>
+        <a class="btn" href="https://github.com/LZY-1021/RoboHarness/blob/main/LICENSE"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>MIT License</a>
+      </div>
+      <hr>
     </section>
 
-    <!-- Framework -->
-    <section>
-        <h2 class="section-title">RoboHarness Framework</h2>
-        <p class="section-subtitle">Here, we demonstrate how RoboHarness perceives visual input and retrieves historical experience to handle image/task prompts without requiring VLA fine-tuning, leading to a higher success rate.</p>
-        
-        <div class="figure-container">
-            <img src="docs/framework.jpg" alt="RoboHarness Framework">
-            <p class="figure-caption"><b>Figure 1:</b> Overview of the RoboHarness framework architecture.</p>
-        </div>
+    <section id="abstract" class="reveal">
+      <h2>Abstract</h2>
+      <p class="lead">Despite the promise of Vision-Language-Action (VLA) models as generalist robotic controllers, their robustness against perceptual noise and environmental variations in out-of-distribution (OOD) tasks remains fundamentally limited by the absence of long-term memory, causal failure attribution, and dynamic intervention capability. To address this, we propose RoboHarness, a memory-augmented policy harness that upgrades frozen VLA policies for robust in-context adaptation without parameter fine-tuning. Specifically, RoboHarness operates through an online pipeline of contrastive Dual-Memory Retrieval-Augmented Generation (RAG), an attribution-driven vision-language orchestrator implemented with a multimodal large language model, and extensible Model Context Protocol (MCP) interventions, while an offline Memory Consolidation module continuously distills the execution traces into reliable priors. Experimental evaluations across three backbone models (π<sub>0</sub>, π<sub>0.5</sub>, and SmolVLA) on LIBERO-PRO and our proposed LIBERO-RoboHarness benchmarks demonstrate that RoboHarness achieves an average absolute success rate gain of 56.6%. This includes a significant absolute improvement of 89.1% in long-horizon task chaining.</p>
+      <div class="stats">
+        <div class="stat"><b data-count="56.6">56.6%</b><span>average absolute success gain</span></div>
+        <div class="stat"><b data-count="89.1">89.1%</b><span>absolute gain, long-horizon task chaining</span></div>
+        <div class="stat"><b>3</b><span>frozen backbones: π<sub>0</sub>, π<sub>0.5</sub>, SmolVLA</span></div>
+        <div class="stat mint"><b>0</b><span>policy parameters fine-tuned</span></div>
+      </div>
     </section>
 
-    <!-- Demos -->
-    <section>
-        <h2 class="section-title">Generalization Performance Demos</h2>
-        <p class="section-subtitle">Our experiments are based on the LIBERO Benchmark. We modified LIBERO to create <b>LIBERO-RoboHarness</b> and also utilized <b>LIBERO-PRO</b> to evaluate robustness.</p>
-
-        <!-- Visual Tools Demo -->
-        <div class="demo-wrapper">
-            <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Visual Intervention Tools</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>MCP Tool</th>
-                        <th>Task Prompt</th>
-                        <th>Origin Image</th>
-                        <th>Modified Image</th>
-                        <th>Success Output</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>Visual Overlay</b></td>
-                        <td><i>"Pick the red bowl from center of the cross formation and place it on the plate"</i></td>
-                        <td><img src="docs/visual/original.jpg" alt="Origin"></td>
-                        <td><img src="docs/visual/modified.jpg" alt="Modified"></td>
-                        <td><video src="docs/visual/success.mp4" autoplay loop muted playsinline></video></td>
-                    </tr>
-                    <tr>
-                        <td><b>Distractor Remove</b></td>
-                        <td><i>"Pick the black bowl from left of the cross formation and place it on the plate"</i></td>
-                        <td><img src="docs/distractor/original.jpg" alt="Origin"></td>
-                        <td><img src="docs/distractor/modified.jpg" alt="Modified"></td>
-                        <td><video src="docs/distractor/success.mp4" autoplay loop muted playsinline></video></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Text Tools Demo -->
-        <div class="demo-wrapper">
-            <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Text & Task Refinement Tools</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>MCP Tool</th>
-                        <th>Original Prompt</th>
-                        <th>Refined Prompt</th>
-                        <th>Observation</th>
-                        <th>Success Output</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>Prompt Simplify</b></td>
-                        <td><i>"Hey, umm... look down there. Can you grab that bottle? You know, the one for fries? Yeah, put it in the basket."</i></td>
-                        <td><i>"Pick the red sauce bottle and place it in the basket"</i></td>
-                        <td><img src="docs/noisy-prompt/original.jpg" alt="Origin"></td>
-                        <td><video src="docs/noisy-prompt/success.mp4" autoplay loop muted playsinline></video></td>
-                    </tr>
-                    <tr>
-                        <td><b>Task Decompose</b></td>
-                        <td><i>"Sort the items: milk and cream cheese into the basket"</i></td>
-                        <td style="text-align: left;">
-                            <b>[SubTask-1]</b> <i>"Pick the milk and place it in the basket."</i><br>
-                            <b>[SubTask-2]</b> <i>"Pick the cream cheese and place it in the basket."</i>
-                        </td>
-                        <td><img src="docs/long-task/original.jpg" alt="Origin"></td>
-                        <td><video src="docs/long-task/success.mp4" autoplay loop muted playsinline></video></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <section id="contributions" class="reveal">
+      <h2>Contributions</h2>
+      <ul class="contrib">
+        <li><b>An attribution-driven memory and intervention architecture.</b> Contrastive retrieval over a success bank and a failure bank tells the orchestrator <i>why</i> a frozen policy is likely to fail, and an extensible set of MCP tools lets it act on that cause.</li>
+        <li><b>An asynchronous system design.</b> Online, the harness retrieves, attributes and intervenes at deployment time; offline, memory consolidation distills new execution traces into reliable priors without slowing the control loop.</li>
+        <li><b>In-context adaptation that works across backbones.</b> On LIBERO-PRO and the proposed LIBERO-RoboHarness benchmark, RoboHarness raises success for π<sub>0</sub>, π<sub>0.5</sub> and SmolVLA by 56.6 points on average, and by 89.1 points in long-horizon task chaining.</li>
+      </ul>
     </section>
 
-    <!-- More Results -->
-    <section>
-        <details>
-            <summary>More Experiment Results & Ablation Studies</summary>
-            <div class="collapsible-content">
-                <div class="tags">
-                    <span class="tag">LIBERO-RoboHarness + LIBERO-PRO</span>
-                    <span class="tag">Backbones: π₀, π₀.₅, SmolVLA</span>
-                    <span class="tag">Zero-shot In-Context Adaptation</span>
-                    <span class="tag">OOD-Generalization</span>
-                </div>
+    <section id="method" class="reveal">
+      <h2>Method</h2>
+      <p>RoboHarness wraps a frozen VLA policy instead of retraining it. Before and during a rollout, it looks up similar past successes and failures, asks a multimodal orchestrator what is different about the current scene or instruction, and applies a short chain of tool calls that reshapes the policy's inputs or its control flow. After the rollout, the trace is consolidated into memory so the next similar task starts from a better prior.</p>
 
-                <!-- Quick Glance -->
-                <div class="demo-wrapper" style="margin-top: 1.5rem;">
-                    <h3 style="margin-bottom: 1rem;">Quick Glance KPI</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Metric</th>
-                                <th>Baseline</th>
-                                <th>RoboHarness</th>
-                                <th>Gain</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>LIBERO-PRO Avg (Pos)</td><td>2.33%</td><td><b style="color: #2563eb;">57.2%</b></td><td><b style="color: #10b981;">+54.87%</b></td></tr>
-                            <tr><td>LIBERO-PRO Avg (Task)</td><td>0.86%</td><td><b style="color: #2563eb;">55.2%</b></td><td><b style="color: #10b981;">+54.34%</b></td></tr>
-                            <tr><td>Dual-Memory Avg Turns</td><td>7.40 (No Memory)</td><td><b style="color: #2563eb;">1.07</b></td><td><b style="color: #10b981;">-85.5%</b></td></tr>
-                        </tbody>
-                    </table>
-                </div>
+      <h3 id="framework">Framework explorer</h3>
+      <p class="hint-text">Pick a module, or click a region of the figure.</p>
+      <div class="mods" role="group" aria-label="Framework modules">
+        <button type="button" class="mod" data-mod="A" aria-pressed="false"><span class="k">A</span><b>Dual-Memory RAG</b><small>retrieve contrasting successes and failures</small></button>
+        <button type="button" class="mod" data-mod="B" aria-pressed="false"><span class="k">B</span><b>Attribution-driven orchestrator</b><small>find the gap, set parameters, chain tools</small></button>
+        <button type="button" class="mod" data-mod="C" aria-pressed="false"><span class="k">C</span><b>MCP interventions</b><small>edit inputs or control flow</small></button>
+        <button type="button" class="mod" data-mod="D" aria-pressed="false"><span class="k">D</span><b>Memory consolidation</b><small>offline: diagnose, then distill</small></button>
+      </div>
+      <figure class="card">
+        <div class="fw" id="fw">
+          <img src="assets/framework.jpg" width="2200" height="1087" alt="RoboHarness framework: A Dual-Memory RAG, B attribution-driven orchestrator, C MCP intervention, D dual-stage memory consolidation">
+          <svg viewBox="0 0 1600 790" preserveAspectRatio="none" aria-hidden="true">
+            <defs><mask id="fw-mask"><rect width="1600" height="790" fill="#fff"/><g id="fw-holes" fill="#000"></g></mask></defs>
+            <rect class="dim" width="1600" height="790" mask="url(#fw-mask)"/>
+            <g id="fw-rings"></g>
+          </svg>
+        </div>
+        <figcaption><b>RoboHarness framework.</b> Online execution (A–C) runs at deployment time; offline memory consolidation (D) runs after each rollout.</figcaption>
+      </figure>
+      <div class="card-box mod-detail" id="mod-detail" aria-live="polite"></div>
 
-                <!-- LIBERO-RoboHarness Figure -->
-                <div class="figure-container">
-                    <img src="docs/result.png" alt="LIBERO-RoboHarness Results">
-                    <p class="figure-caption"><b>Figure:</b> Main performance comparison across visual, linguistic, and long-horizon OOD challenges.</p>
-                </div>
-                <p style="text-align: center; color: #475569; margin-bottom: 2rem;">
-                    <b>RoboHarness consistently reduces sensitivity to sensory noise, linguistic ambiguity, execution instability, and long-horizon error accumulation</b>.
-                </p>
-
-                <!-- Ablation -->
-                <h3 class="section-title" style="margin-top: 3rem;">Ablation Study</h3>
-                
-                <div class="highlights">
-                    <div class="demo-wrapper" style="flex: 1; min-width: 300px;">
-                        <h4 style="margin-bottom: 1rem;">Dual-Memory Ablation</h4>
-                        <table>
-                            <thead>
-                                <tr><th>Memory Setting</th><th>Avg. Turns</th><th>First-Turn Score</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>No Memory</td><td>7.40</td><td>60.0</td></tr>
-                                <tr><td>Failure Only</td><td>7.33</td><td>73.75</td></tr>
-                                <tr><td>Success Only</td><td>1.47</td><td>91.07</td></tr>
-                                <tr><td><b>RoboHarness (Dual)</b></td><td><b>1.07</b></td><td><b>96.3</b></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="demo-wrapper" style="flex: 1; min-width: 300px;">
-                        <h4 style="margin-bottom: 1rem;">RAG Richness Ablation</h4>
-                        <table>
-                            <thead>
-                                <tr><th>RAG Config</th><th>Success Rate</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>No-RAG</td><td>19.2%</td></tr>
-                                <tr><td>Limited-RAG</td><td>48.8%</td></tr>
-                                <tr><td><b>Rich-RAG (RoboHarness)</b></td><td><b>60.1%</b></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </details>
+      <h3 id="tools">MCP tools</h3>
+      <p>Each tool targets one failure mode and exposes a small set of parameters that the orchestrator fills in from the retrieved experience (paper Table I). New tools can be added through the same Model Context Protocol interface.</p>
+      <table>
+        <thead><tr><th>Tool</th><th>Failure mode it addresses</th><th>Parameters θ</th></tr></thead>
+        <tbody>
+          <tr><td><b>Paint-to-Action</b></td><td>Visual domain shift</td><td>C, M, A<sub>mask</sub></td></tr>
+          <tr><td><b>Eraser</b></td><td>Causal confusion from distractors</td><td>D, D<sub>masks</sub></td></tr>
+          <tr><td><b>Prompt-Refiner</b></td><td>Instruction mismatch</td><td>S<sub>origin</sub></td></tr>
+          <tr><td><b>Chaining-Step</b></td><td>Temporal compounding over long horizons</td><td>(N<sub>e</sub>, N<sub>b</sub>)<sub>k</sub></td></tr>
+          <tr><td><b>Encore</b></td><td>Execution stagnation</td><td>[s<sub>s</sub>, s<sub>e</sub>], N<sub>w</sub></td></tr>
+        </tbody>
+      </table>
+      <div class="callout">Tool chains follow two principles: <b>sensory-first</b>, so perceptual corrections are applied before anything else, and <b>logical dependency</b>, so a tool runs only after the tools whose output it relies on.</div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">Explore More</h3>
-        <div class="footer-links">
-            <a href="http://arxiv.org/abs/2603.24060" target="_blank" rel="noopener" class="footer-link">Read the Paper on arXiv</a>
-            <a href="https://github.com/LZY-1021/RoboHarness.git" target="_blank" rel="noopener" class="footer-link">View Code on GitHub</a>
+    <section id="demos" class="reveal">
+      <h2>Interventions in action</h2>
+      <p>Four cases from LIBERO-RoboHarness. The VLA policy itself is unchanged in every case; only what it sees, what it is told, or how the task is staged is changed.</p>
+      <div class="tabs" role="tablist" aria-label="Intervention cases"></div>
+      <div class="card-box" id="case-box"></div>
+    </section>
+
+    <section id="results" class="reveal">
+      <h2>Results</h2>
+
+      <h3 id="lrh">LIBERO-RoboHarness</h3>
+      <p>Five OOD suites, each built to stress one weakness of frozen policies. Pick a backbone to compare it with and without the harness (paper Fig. 8).</p>
+      <div class="card-box" id="lrh-box">
+        <div class="race-head">
+          <div class="seg" role="tablist" aria-label="Backbone">
+            <button type="button" aria-selected="true" data-bb="pi05">π<sub>0.5</sub></button>
+            <button type="button" aria-selected="false" data-bb="smol">SmolVLA</button>
+            <button type="button" aria-selected="false" data-bb="pi0">π<sub>0</sub></button>
+          </div>
+          <button type="button" class="ghost" id="lrh-replay">↻ Replay</button>
         </div>
+        <div class="legend-row"><span><i style="background:var(--base)"></i>Frozen policy</span><span><i style="background:var(--accent-soft)"></i>+ RoboHarness</span></div>
+        <div id="lrh-rows"></div>
+        <div class="mean-line"><span>Mean gain over five suites</span><b id="lrh-mean">0.0</b><span class="muted">points · 59.3 averaged over all three backbones</span></div>
+      </div>
+      <p class="note">Task Chaining reports final-task success; RoboHarness's sub-task 1 and sub-task 2 rates are listed beneath it. The frozen policies essentially never finish the chain.</p>
 
-        <div class="citation">
-            <b style="display: block; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">Citation:</b>
-            @misc{li2026roboharness,
-              title={RoboHarness 🏇: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation},
-              author={Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
-              year={2026},
-              eprint={2603.24060},
-              archivePrefix={arXiv},
-              primaryClass={cs.RO},
-              url={http://arxiv.org/abs/2603.24060}
-            }
+      <h3 id="pro">LIBERO-PRO</h3>
+      <p>LIBERO-PRO perturbs object positions (<i>Pos</i>) and task instructions (<i>Task</i>). Results for π<sub>0.5</sub>, per task (paper Table III).</p>
+      <div class="card-box" id="pro-box">
+        <div class="race-head">
+          <div class="seg" role="tablist" aria-label="Perturbation">
+            <button type="button" aria-selected="true" data-pro="pos">Position (6 tasks)</button>
+            <button type="button" aria-selected="false" data-pro="task">Task (14 tasks)</button>
+          </div>
+          <label class="switch"><input type="checkbox" id="pro-sort"> Sort by gain</label>
         </div>
+        <div class="kv"><span>Average success, π<sub>0.5</sub> → + RoboHarness</span><b id="pro-avg">0.0%</b></div>
+        <div class="dual-track" style="height:16px"><i class="o" id="pro-avg-o"></i><i class="b" id="pro-avg-b" style="top:4px;bottom:4px"></i></div>
+        <p class="muted small" id="pro-avg-note"></p>
+        <div class="pro-grid" id="pro-grid"></div>
+      </div>
 
-        <p style="margin-top: 2rem; color: #64748b; font-size: 0.9rem;">
-            Acknowledgements: This repository builds upon <b>LIBERO-PRO</b> and <b>LeRobot</b>. We thank the original authors for their foundational contributions.
-        </p>
-    </footer>
-</main>
+      <h3 id="latency">Latency</h3>
+      <p>Per-step cost on an RTX 4090, amortized over 1,000 LIBERO steps (paper Table II). Retrieval and the vision tools add well under a millisecond; orchestration is the main overhead.</p>
+      <div class="card-box" id="lat-box">
+        <div class="race-head"><span>Milliseconds per step</span>
+          <div class="seg" role="tablist" aria-label="Statistic">
+            <button type="button" aria-selected="true" data-lat="0">Mean</button>
+            <button type="button" aria-selected="false" data-lat="1">P95</button>
+          </div></div>
+        <div id="lat-rows"></div>
+      </div>
 
+      <h3 id="ablations">Ablations</h3>
+      <div class="two-col">
+        <div class="card-box" id="mem-box">
+          <div class="race-head"><span>Which memories matter?</span></div>
+          <div class="turns" id="turns"></div>
+          <div class="turns-lab"><span>No memory</span><span>Failure only</span><span>Success only</span><span>Dual</span></div>
+          <div class="kv"><span>Average turns to success</span><b id="mem-turns">1.07</b></div>
+          <div class="kv"><span>First-turn score</span><b id="mem-first">96.3</b></div>
+          <p class="muted small">Click a bar. Runs that never succeed are capped at the 8-turn failure threshold. Success memories carry most of the benefit; adding failures on top makes the first attempt better still.</p>
+        </div>
+        <div class="card-box" id="rag-box">
+          <div class="race-head"><span>How much retrieved context?</span></div>
+          <div class="seg" role="tablist" aria-label="RAG configuration">
+            <button type="button" aria-selected="false" data-rag="0">No-RAG</button>
+            <button type="button" aria-selected="false" data-rag="1">Limited-RAG</button>
+            <button type="button" aria-selected="true" data-rag="2">Rich-RAG</button>
+          </div>
+          <div class="kv"><span>Clutter Removal success, π<sub>0.5</sub></span><b id="rag-sr">60.1%</b></div>
+          <div class="bar-track lg"><span class="bar-fill" id="rag-bar" style="width:60.1%"></span></div>
+          <p class="lab" style="margin:14px 0 0;font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase">Tool chain the orchestrator chose</p>
+          <div class="chain" id="rag-chain"></div>
+          <p class="muted small" id="rag-why"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="conclusion" class="reveal">
+      <h2>Conclusion</h2>
+      <p>RoboHarness shows that a frozen VLA policy can be made far more robust without touching its weights. Contrastive memories of what worked and what failed let a multimodal orchestrator attribute a likely failure to its cause, and a small set of MCP tools repairs that cause by editing the observation, the instruction or the task structure. Offline consolidation keeps the memory reliable as experience accumulates. Across π<sub>0</sub>, π<sub>0.5</sub> and SmolVLA on LIBERO-PRO and LIBERO-RoboHarness, this raises success by 56.6 points on average and by 89.1 points in long-horizon task chaining.</p>
+    </section>
+
+    <section id="citation" class="reveal">
+      <h2>Citation</h2>
+      <div class="bib"><button type="button" id="copy-bib">Copy</button><pre id="bib">@misc{li2026roboharness,
+  title         = {RoboHarness: A Memory-Augmented Policy Harness for Vision-Language-Action Model Robustness via In-Context Adaptation},
+  author        = {Zhuoran Li and Zhiyang Li and Kaijun Zhou and Jinyu Gu},
+  year          = {2026},
+  eprint        = {2603.24060},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO},
+  url           = {https://arxiv.org/abs/2603.24060}
+}</pre></div>
+      <h3>Acknowledgements</h3>
+      <p class="muted">This repository builds on <a href="https://github.com/Zxy-MLlab/LIBERO-PRO">LIBERO-PRO</a> and <a href="https://github.com/huggingface/lerobot">LeRobot</a>; we thank their authors. The work was supported by the Shanghai project 25511104100, NSFC 62432010, the Ministry of Education project JYB2025XDXM122, and the OpenHarmony PMC.</p>
+    </section>
+  </main>
+</div>
+
+<footer>Code released under the MIT License. Typeset in Gelasio (SIL Open Font License).</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
