@@ -406,7 +406,7 @@
       if (el.id === "mem-box") growTurns();
       io.unobserve(el);
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0, rootMargin: "0px 0px -12% 0px" });
   $$(".reveal, #lrh-box, #pro-box, #lat-box, #mem-box").forEach((el) => io.observe(el));
 
   // ---------- table of contents highlight ----------
